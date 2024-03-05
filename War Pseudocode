@@ -1,0 +1,31 @@
+/***
+WAR Pseudo Code
+Philip Gerard
+***/
+
+// 2 player game
+    // Declare computer program as secondary player
+    // Separate for 
+// divide 52 cards between the players
+    // use a base array and pointers to direct the cards from the base to the computer and player
+    // 26 cards for player and 26 cards for computer
+    // using void, rand, and srand
+// top card on each deck revealed by each player
+    // create a comparative/equivalency function to determine output and loop the game under the computer's array is empty
+    // the array should be empty to delcare the opposing winner 
+// Highest number wins collecting all the cards
+    // 
+// Game goes until one player has all the cards
+    // computer array or player array should be empty to declare the opponent the winner
+
+/***
+Building a prototype
+***/
+
+// base prototype focuses on numbers 1-52 
+// Seperate 26 numbers between the computer and the player 
+
+// base array containing all numbers
+// randomly seperate 26 numbers between the computer array and player array
+// use rand and srand for absolute randomness
+//isolate the number for them to be them selves 
