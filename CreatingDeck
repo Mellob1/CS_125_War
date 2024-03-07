@@ -16,7 +16,29 @@ void cardDeck(){
 
 
 }
+// Function to shuffle the deck of cards
+void shuffleDeck(Card *deck) {
+    int i, j;
+    Card temp;
+    for (i = 0; i < DECK_SIZE; i++) {
+        j = rand() % DECK_SIZE;
+        temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
+}
 
+// Function to print the ASCII representation of a card
+void printCard(Card card) {
+    const char *faces[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+    const char *suits[] = {"Spades", "Hearts", "Clubs", "Diamonds"};
+    printf(" -------\n");
+    printf("| %s    |\n", faces[card.face]);
+    printf("|       |\n");
+    printf("|   %s   |\n", suits[card.suit]);
+    printf("|       |\n");
+    printf("|    %s |\n", faces[card.face]);
+    printf(" -------\n");
 int main(){
 
 
