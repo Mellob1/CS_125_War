@@ -1,0 +1,31 @@
+//Another way to do deck
+#include <stdio.h>
+
+typedef struct cardDeck{
+    int suit; // 56,57,58,59 wrt, heart, spades,clubs,diamonds
+    int value;// 1,2....10,11,12,13
+} Deck;
+
+int main(){
+    Deck cardStack[52];
+    int x = 0;
+    int y = 0;
+  
+    for (s = 56; s < 60;s++){
+        for(x = 0; x < 13; x++){
+
+            cardStack[y].suit = s;
+            cardStack[y].value = x+1;
+            if (cardStack[y].suit == 56)
+                printf("♥  %d\n", cardStack[y].value);
+            else if (cardStack[y].suit == 57)
+                printf("♠ %d\n", cardStack[y].value);
+            else if (cardStack[y].suit == 58)
+                printf("♣ %d\n", cardStack[y].value);
+            else if (cardStack[y].suit == 59)
+                printf("◇ %d\n", cardStack[y].value);
+            y++;
+        }
+
+    }
+}
