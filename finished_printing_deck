@@ -13,12 +13,14 @@ int main(){
     x = 0;
 
     int y = 0;
+    //this for loop goes through suit for the cards
     for (s = 56; s < 60;s++){ 
 
         for(x = 0; x < 13; x++){
             
             cardStack[y].suit = s;
             cardStack[y].value = x+1;
+            //if statements checking value of card and assigning suit
             if (cardStack[y].suit == 56)
                 if (cardStack[y].value<10)
                     printf("♥  %d\n", cardStack[y].value);
