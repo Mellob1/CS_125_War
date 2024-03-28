@@ -22,7 +22,7 @@ int main(){
             cardStack[y].value = x+1;
             //if statements checking value of card and assigning suit
             if (cardStack[y].suit == 56)
-                if (cardStack[y].value<10)
+                if (cardStack[y].value <= 10)
                     printf("♥  %d\n", cardStack[y].value);
                 else if (cardStack[y].value == 11)
                     printf("♥  J\n");
@@ -31,7 +31,7 @@ int main(){
                 else if (cardStack[y].value == 13)
                     printf("♥  K\n");
             if (cardStack[y].suit == 57)
-                if (cardStack[y].value<10)
+                if (cardStack[y].value <= 10)
                     printf("♠  %d\n", cardStack[y].value);
                 else if (cardStack[y].value == 11)
                     printf("♠  J\n");
@@ -40,7 +40,7 @@ int main(){
                 else if (cardStack[y].value == 13)
                     printf("♠  K\n");
             if (cardStack[y].suit == 58)
-                if (cardStack[y].value<10)
+                if (cardStack[y].value <= 10)
                     printf("♣  %d\n", cardStack[y].value);
                 else if (cardStack[y].value == 11)
                     printf("♣  J\n");
@@ -49,7 +49,7 @@ int main(){
                 else if (cardStack[y].value == 13)
                     printf("♣  K\n");
             if (cardStack[y].suit == 59)
-                if (cardStack[y].value<10)
+                if (cardStack[y].value <= 10)
                     printf("◆  %d\n", cardStack[y].value);
                 else if (cardStack[y].value == 11)
                     printf("◆  J\n");
