@@ -1,0 +1,4 @@
+typedef struct cardDeck{
+    int suit; // 56,57,58,59 wrt, heart, spades,clubs,diamonds
+    int value;// 1,2....10,11,12,13
+} Deck;
