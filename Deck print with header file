@@ -1,0 +1,58 @@
+//Deck using header file for structure
+#include <stdio.h>
+#include "Deck.h"
+
+int main(){
+   
+    int s,x;
+    Deck cardStack[52];
+    x = 0;
+
+    int y = 0;
+    for (s = 56; s < 60;s++){ 
+
+        for(x = 0; x < 13; x++){
+            
+            cardStack[y].suit = s;
+            cardStack[y].value = x+1;
+            if (cardStack[y].suit == 56)
+                if (cardStack[y].value<10)
+                    printf("♥  %d\n", cardStack[y].value);
+                else if (cardStack[y].value == 11)
+                    printf("♥  J\n");
+                else if (cardStack[y].value ==12)
+                    printf("♥  Q\n");
+                else if (cardStack[y].value == 13)
+                    printf("♥  K\n");
+            if (cardStack[y].suit == 57)
+                if (cardStack[y].value<10)
+                    printf("♠  %d\n", cardStack[y].value);
+                else if (cardStack[y].value == 11)
+                    printf("♠  J\n");
+                else if (cardStack[y].value ==12)
+                    printf("♠  Q\n");
+                else if (cardStack[y].value == 13)
+                    printf("♠  K\n");
+            if (cardStack[y].suit == 58)
+                if (cardStack[y].value<10)
+                    printf("♣  %d\n", cardStack[y].value);
+                else if (cardStack[y].value == 11)
+                    printf("♣  J\n");
+                else if (cardStack[y].value == 12)
+                    printf("♣  Q\n");
+                else if (cardStack[y].value == 13)
+                    printf("♣  K\n");
+            if (cardStack[y].suit == 59)
+                if (cardStack[y].value<10)
+                    printf("◆  %d\n", cardStack[y].value);
+                else if (cardStack[y].value == 11)
+                    printf("◆  J\n");
+                else if (cardStack[y].value == 12)
+                    printf("◆  Q\n");
+                else if (cardStack[y].value == 13)
+                    printf("◆  K\n");
+            y++;
+        }
+
+    }
+}
