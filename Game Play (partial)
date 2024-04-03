@@ -1,0 +1,22 @@
+//war game play
+#include <stdio.h>
+
+void comparison(){
+    
+    int topCpu, topUser, numCpu, numUser;
+    
+    numCpu = 26;
+    numUser = 26;    
+
+    while (numCpu > 0 || numUser > 0 ){
+
+        if (UserStack[i] > CpuStack[i]){
+        
+            userStack[numUser+1] = cpuStack[i]
+            numUser++;
+        }
+
+    }
+        
+    
+}
