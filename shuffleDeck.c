@@ -69,8 +69,8 @@ int main() {
     srand(time(NULL));
     int i;
     Deck cardStack[52];
-    Deck cpuStack[52];
-    Deck userStack[52];
+    Deck cpuStack[5000];
+    Deck userStack[5000];
     for (i = 0; i < 52; i++) {
         int suit = i / 13;
         int value = i % 13;
