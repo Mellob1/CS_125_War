@@ -101,4 +101,5 @@ int main() {
         else if (cardStack[i].suit == 59)
             userStack[i-26] = cardStack[i];
     }
-
+return 0;
+}
