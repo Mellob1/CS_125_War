@@ -1,14 +1,13 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-//Declares values for deck
 typedef struct cardDeck {
     int suit; // 56,57,58,59 wrt, heart, spades,clubs,diamonds
     int value;// 1,2....10,11,12,13
 } Deck;
 
-//Shuffles deck of cards using Fisher-Yates algorithm
 void shuffleDeck(Deck* deck) {
     int i, j;
     Deck temp;
@@ -20,7 +19,6 @@ void shuffleDeck(Deck* deck) {
     }
 }
 
-//Prints Decks of Cards
 void printDeck(Deck* deck) {
     int i;
     for (i = 0; i < 52; i++) {
@@ -69,8 +67,10 @@ void printDeck(Deck* deck) {
 
 int main() {
     srand(time(NULL));
-    int i, midIndex;
+    int i;
     Deck cardStack[52];
+    Deck cpuStack[52];
+    Deck userStack[52];
     for (i = 0; i < 52; i++) {
         int suit = i / 13;
         int value = i % 13;
@@ -78,31 +78,27 @@ int main() {
         cardStack[i].value = value + 1;
     }
     shuffleDeck(cardStack);
-    //Splits deck of cards into cpu and user
-    midIndex = 52 / 2;
-    printf("CPU's cards:\n");
-    for (i = 0; i < midIndex; i++) {
-        if (cardStack[i].suit == 56)
-            printf("♥  %d\n", cardStack[i].value);
-        else if (cardStack[i].suit == 57)
-            printf("♠  %d\n", cardStack[i].value);
-        else if (cardStack[i].suit == 58)
-            printf("♣  %d\n", cardStack[i].value);
-        else if (cardStack[i].suit == 59)
-            printf("◆  %d\n", cardStack[i].value);
-    }
-    printf("User's cards:\n");
-    for (i = midIndex; i < 52; i++) {
-        if (cardStack[i].suit == 56)
-            printf("♥  %d\n", cardStack[i].value);
-        else if (cardStack[i].suit == 57)
-            printf("♠  %d\n", cardStack[i].value);
-        else if (cardStack[i].suit == 58)
-            printf("♣  %d\n", cardStack[i].value);
-        else if (cardStack[i].suit == 59)
-            printf("◆  %d\n", cardStack[i].value);
-    }
     
-    //printDeck(cardStack);
-    return 0;
-}
+    printDeck(cardStack);
+    for (i = 0; i < 26; i++) {
+        if (cardStack[i].suit == 56)
+            cpuStack[i] = cardStack[i];
+        else if (cardStack[i].suit == 57)
+            cpuStack[i] = cardStack[i];
+        else if (cardStack[i].suit == 58)
+            cpuStack[i] = cardStack[i];
+        else if (cardStack[i].suit == 59)
+            cpuStack[i] = cardStack[i];
+    }
+
+    for (i = 26; i < 52; i++) {
+        if (cardStack[i].suit == 56)
+            userStack[i-26] = cardStack[i];
+        else if (cardStack[i].suit == 57)
+            userStack[i-26] = cardStack[i];
+        else if (cardStack[i].suit == 58)
+            userStack[i-26] = cardStack[i];
+        else if (cardStack[i].suit == 59)
+            userStack[i-26] = cardStack[i];
+    }
+
