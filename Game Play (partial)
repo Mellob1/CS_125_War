@@ -18,10 +18,10 @@ void shuffleDeck(Deck* deck) {
     }
 }
 
-void printDeck(Deck* deck) {
+void printDeck(Deck* deck, int numCards, int topDeck) {
     int i;
-    for (i = 0; i < 52; i++) {
-        if (deck[i].suit == 56) {
+    for (i = topDeck; i < numCards; i++) {
+         if (deck[i].suit == 56) {
             if (deck[i].value <= 10)
                 printf("♥  %d\n", deck[i].value);
             else if (deck[i].value == 11)
@@ -63,7 +63,7 @@ void printDeck(Deck* deck) {
         }
     }
 }
-int comparison(Deck userStack[5000],Deck cpuStack[5000]){
+void comparison(Deck userStack[5000],Deck cpuStack[5000]){
     
     int top, numCpu, numUser;
     int result;
@@ -72,35 +72,54 @@ int comparison(Deck userStack[5000],Deck cpuStack[5000]){
     numUser = 26;    
 
     while (numCpu > 0 || numUser > 0 ){
-
+        
+        printf("Users Deck: *************** %d\n", numUser);
+         printDeck(userStack,  numUser+top,top);
+         printf("CPU Deck: *************** %d\n",numCpu);
+         printDeck(cpuStack,  numCpu+top,top);
         if (userStack[top].value > cpuStack[top].value){
         
-            userStack[numUser+1] = cpuStack[top];
+            userStack[numUser+1].value = cpuStack[top].value;
+            userStack[numUser+1].suit = cpuStack[top].suit;
             numCpu--;
             top++;
         }
         else if (userStack[top].value < cpuStack[top].value){
         
-            cpuStack[numCpu+1] = userStack[top];
+            cpuStack[numCpu+1].value = userStack[top].value;
+            cpuStack[numCpu+1].suit = userStack[top].suit;
             numUser--;
             top++;
         }
-        // if tie play 3 cards (upside down) then flip fourht card winner takes all, Can we just play another card and winner takes pile when untied
-        //else if (userStack[top] == cpuStack[top]){
-            
-            
-        //}
-        else
+        // if tie flip another card
+        else if (userStack[top].value == cpuStack[top].value){
             top++;
-
+            while (userStack[top].value == cpuStack[top].value){
+                if (userStack[top].value > cpuStack[top].value){
+        
+                    userStack[numUser+1] = cpuStack[top];
+                    numCpu--;
+                    top++;
+                }
+        
+                else if (userStack[top].value < cpuStack[top].value){
+                    cpuStack[numCpu+1] = userStack[top];
+                    numUser--;
+                    top++;
+                }
+            }
+        }
+         printf("Users Deck: *************** %d\n", numUser);
+         printDeck(userStack, numUser+top,top);
+         printf("CPU Deck: *************** %d\n",numCpu);
+         printDeck(cpuStack, numCpu+top,top);
+         scanf("%*d");
     }
     
     if (numUser > numCpu)
-        result = 1;
+        printf("User Wins");
     else if (numUser < numCpu)
-        result = -1;
-
-    return result;  
+        printf("CPU wins");
 }
 //how do we get it to run once when hitting enter
 int main(){
@@ -117,7 +136,6 @@ int main(){
     }
     shuffleDeck(cardStack);
     
-    printDeck(cardStack);
     for (i = 0; i < 26; i++) {
         if (cardStack[i].suit == 56)
             cpuStack[i] = cardStack[i];
@@ -139,11 +157,6 @@ int main(){
         else if (cardStack[i].suit == 59)
             userStack[i-26] = cardStack[i];
     }
-    int result = comparison(userStack,cpuStack);
-    //this isnt working
-    if (result == 1)
-        printf("User wins");
-    else if (result == -1)
-        printf("Cpu wins");
+    comparison(userStack,cpuStack);
     return 0;
 }
