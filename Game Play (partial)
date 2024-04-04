@@ -71,7 +71,7 @@ void comparison(Deck userStack[50],Deck cpuStack[50]){
     numCpu = 4;
     numUser = 4;    
 
-    printf("Users Deck: *************** %d\n", numUser - top);
+    printf("User Deck: *************** %d\n", numUser - top);
     printDeck(userStack, numUser,top);
          printf("CPU Deck: *************** %d\n",numCpu - top);
          printDeck(cpuStack,  numCpu,top);
@@ -79,7 +79,7 @@ void comparison(Deck userStack[50],Deck cpuStack[50]){
         
          
         if (userStack[top].value > cpuStack[top].value){
-            printf("User wins\n");
+            printf("User Wins\n");
             userStack[numUser].value = userStack[top].value;
             userStack[numUser].suit = userStack[top].suit;
             userStack[numUser+1].value = cpuStack[top].value;
@@ -89,7 +89,7 @@ void comparison(Deck userStack[50],Deck cpuStack[50]){
             top++;
         }
         else if (userStack[top].value < cpuStack[top].value){
-            printf("Cpu wins\n");
+            printf("CPU Wins\n");
             cpuStack[numCpu].value = cpuStack[top].value;
             cpuStack[numCpu].suit = cpuStack[top].suit;
             cpuStack[numCpu+1].value = userStack[top].value;
@@ -116,17 +116,18 @@ void comparison(Deck userStack[50],Deck cpuStack[50]){
                 }
             }
         }*/
-        printf("Users Deck: *************** \n");
+        printf("\nUser Deck: *************** \n");
         printDeck(userStack, numUser+top,top);
-        printf("CPU Deck: *************** \n");
+        printf("\nCPU Deck: *************** \n");
         printDeck(cpuStack, numCpu+top,top);
-        scanf("%*d");
+        printf("Hit enter for results of the next round!\n");
+        scanf("%*c");
     }
     
     if (numUser > numCpu)
-        printf("User Wins");
+        printf("User Wins the Game!\n");
     else if (numUser < numCpu)
-        printf("CPU wins");
+        printf("CPU Wins the Game!\n");
 }
 //how do we get it to run once when hitting enter
 int main(){
@@ -145,8 +146,8 @@ int main(){
     shuffleDeck(cardStack);
     
     for (i = 0; i < cardsPerHand; i++) {
-        cpuStack[i].value = 1; //=cardStack[i].value;
-        cpuStack[i].suit = 56;
+        cpuStack[i].value = cardStack[i].value;
+        cpuStack[i].suit = cardStack[i].suit;
         
     }
 
