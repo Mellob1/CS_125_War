@@ -20,7 +20,7 @@ void shuffleDeck(Deck* deck) {
 
 void printDeck(Deck* deck, int numCards, int topDeck) {
     int i;
-    for (i = topDeck; i < numCards; i++) {
+    for (i = topDeck; i < numCards + topDeck; i++) {
          if (deck[i].suit == 56) {
             if (deck[i].value <= 10)
                 printf("♥  %d\n", deck[i].value);
@@ -63,36 +63,43 @@ void printDeck(Deck* deck, int numCards, int topDeck) {
         }
     }
 }
-void comparison(Deck userStack[5000],Deck cpuStack[5000]){
+void comparison(Deck userStack[50],Deck cpuStack[50]){
     
     int top, numCpu, numUser;
     int result;
     top = 0;
-    numCpu = 26;
-    numUser = 26;    
+    numCpu = 4;
+    numUser = 4;    
 
-    while (numCpu > 0 || numUser > 0 ){
+    printf("Users Deck: *************** %d\n", numUser - top);
+    printDeck(userStack, numUser,top);
+         printf("CPU Deck: *************** %d\n",numCpu - top);
+         printDeck(cpuStack,  numCpu,top);
+    while (numCpu-top >= 0 && numUser-top >= 0 ){
         
-        printf("Users Deck: *************** %d\n", numUser);
-         printDeck(userStack,  numUser+top,top);
-         printf("CPU Deck: *************** %d\n",numCpu);
-         printDeck(cpuStack,  numCpu+top,top);
+         
         if (userStack[top].value > cpuStack[top].value){
-        
+            printf("User wins\n");
+            userStack[numUser].value = userStack[top].value;
+            userStack[numUser].suit = userStack[top].suit;
             userStack[numUser+1].value = cpuStack[top].value;
             userStack[numUser+1].suit = cpuStack[top].suit;
             numCpu--;
+            numUser+=2;
             top++;
         }
         else if (userStack[top].value < cpuStack[top].value){
-        
+            printf("Cpu wins\n");
+            cpuStack[numCpu].value = cpuStack[top].value;
+            cpuStack[numCpu].suit = cpuStack[top].suit;
             cpuStack[numCpu+1].value = userStack[top].value;
             cpuStack[numCpu+1].suit = userStack[top].suit;
             numUser--;
+            numCpu+=2;
             top++;
         }
         // if tie flip another card
-        else if (userStack[top].value == cpuStack[top].value){
+        /*else if (userStack[top].value == cpuStack[top].value){
             top++;
             while (userStack[top].value == cpuStack[top].value){
                 if (userStack[top].value > cpuStack[top].value){
@@ -108,12 +115,12 @@ void comparison(Deck userStack[5000],Deck cpuStack[5000]){
                     top++;
                 }
             }
-        }
-         printf("Users Deck: *************** %d\n", numUser);
-         printDeck(userStack, numUser+top,top);
-         printf("CPU Deck: *************** %d\n",numCpu);
-         printDeck(cpuStack, numCpu+top,top);
-         scanf("%*d");
+        }*/
+        printf("Users Deck: *************** \n");
+        printDeck(userStack, numUser+top,top);
+        printf("CPU Deck: *************** \n");
+        printDeck(cpuStack, numCpu+top,top);
+        scanf("%*d");
     }
     
     if (numUser > numCpu)
@@ -125,9 +132,10 @@ void comparison(Deck userStack[5000],Deck cpuStack[5000]){
 int main(){
     srand(time(NULL));
     int i;
+    int cardsPerHand = 4;
     Deck cardStack[52];
-    Deck cpuStack[5000];
-    Deck userStack[5000];
+    Deck cpuStack[50];
+    Deck userStack[50];
     for (i = 0; i < 52; i++) {
         int suit = i / 13;
         int value = i % 13;
@@ -136,27 +144,17 @@ int main(){
     }
     shuffleDeck(cardStack);
     
-    for (i = 0; i < 26; i++) {
-        if (cardStack[i].suit == 56)
-            cpuStack[i] = cardStack[i];
-        else if (cardStack[i].suit == 57)
-            cpuStack[i] = cardStack[i];
-        else if (cardStack[i].suit == 58)
-            cpuStack[i] = cardStack[i];
-        else if (cardStack[i].suit == 59)
-            cpuStack[i] = cardStack[i];
+    for (i = 0; i < cardsPerHand; i++) {
+        cpuStack[i].value = 1; //=cardStack[i].value;
+        cpuStack[i].suit = 56;
+        
     }
 
-    for (i = 26; i < 52; i++) {
-        if (cardStack[i].suit == 56)
-            userStack[i-26] = cardStack[i];
-        else if (cardStack[i].suit == 57)
-            userStack[i-26] = cardStack[i];
-        else if (cardStack[i].suit == 58)
-            userStack[i-26] = cardStack[i];
-        else if (cardStack[i].suit == 59)
-            userStack[i-26] = cardStack[i];
+    for (i = 0; i < cardsPerHand; i++) {
+        userStack[i].value = cardStack[i+cardsPerHand].value;
+        userStack[i].suit = cardStack[i+cardsPerHand].suit;
     }
     comparison(userStack,cpuStack);
+
     return 0;
 }
