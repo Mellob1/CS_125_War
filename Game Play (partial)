@@ -66,7 +66,7 @@ void printDeck(Deck* deck) {
 int comparison(Deck userStack[5000],Deck cpuStack[5000]){
     
     int top, numCpu, numUser;
-    
+    int result;
     top = 0;
     numCpu = 26;
     numUser = 26;    
@@ -76,13 +76,13 @@ int comparison(Deck userStack[5000],Deck cpuStack[5000]){
         if (userStack[top].value > cpuStack[top].value){
         
             userStack[numUser+1] = cpuStack[top];
-            numUser++;
+            numCpu--;
             top++;
         }
         else if (userStack[top].value < cpuStack[top].value){
         
             cpuStack[numCpu+1] = userStack[top];
-            numCpu++;
+            numUser--;
             top++;
         }
         // if tie play 3 cards (upside down) then flip fourht card winner takes all, Can we just play another card and winner takes pile when untied
@@ -90,10 +90,19 @@ int comparison(Deck userStack[5000],Deck cpuStack[5000]){
             
             
         //}
+        else
+            top++;
 
-    }     
+    }
+    
+    if (numUser > numCpu)
+        result = 1;
+    else if (numUser < numCpu)
+        result = -1;
+
+    return result;  
 }
-
+//how do we get it to run once when hitting enter
 int main(){
     srand(time(NULL));
     int i;
@@ -130,6 +139,11 @@ int main(){
         else if (cardStack[i].suit == 59)
             userStack[i-26] = cardStack[i];
     }
-    comparison(userStack,cpuStack);
+    int result = comparison(userStack,cpuStack);
+    //this isnt working
+    if (result == 1)
+        printf("User wins");
+    else if (result == -1)
+        printf("Cpu wins");
     return 0;
 }
