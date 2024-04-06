@@ -15,10 +15,3 @@ void shuffleDeck(Deck* deck) {
         deck[j] = temp;
     }
 }
-
-
-
-
-    return 0;
-}
-
