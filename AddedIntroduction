@@ -1,0 +1,232 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define CARDS_IN_DECK 52
+
+typedef struct cardDeck {
+    int suit; // 56,57,58,59 wrt, heart, spades,clubs,diamonds
+    int value;// 1,2....10,11,12,13
+} Deck;                //HM - Deck is not the best name because this structure is only for a single card
+                       //if you create an Array of this type, it will be a deck 
+void shuffleDeck(Deck* deck) {
+    int i, j;
+    Deck temp;
+    for (i = CARDS_IN_DECK - 1; i >= 0; i--) {  //HM i changed to i>=0 so first card gets shuffled
+        j = rand() % (i + 1);
+        temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
+}
+
+void printDeck(Deck* deck, int numCards, int topDeck) {
+    printf("calling printDeck for %d #cards where topDeck=%d\n", numCards, topDeck);
+    int i;
+    for (i = topDeck; i < (numCards + topDeck); i++) {
+         if (deck[i].suit == 56) {
+            if (deck[i].value <= 10 && deck[i].value != 1)
+                printf("♥  %d\n", deck[i].value);
+            else if (deck[i].value == 11)
+                printf("♥  J\n");
+            else if (deck[i].value == 12)
+                printf("♥  Q\n");
+            else if (deck[i].value == 13)
+                printf("♥  K\n");
+            else if (deck[i].value == 1)
+                printf("♥  A\n");
+        }
+        if (deck[i].suit == 57) {
+            if (deck[i].value <= 10 && deck[i].value != 1)
+                printf("♠  %d\n", deck[i].value);
+            else if (deck[i].value == 11)
+                printf("♠  J\n");
+            else if (deck[i].value == 12)
+                printf("♠  Q\n");
+            else if (deck[i].value == 13)
+                printf("♠  K\n");
+            else if (deck[i].value == 1)
+                printf("♠  A\n");
+        }
+        if (deck[i].suit == 58) {
+            if (deck[i].value <= 10 && deck[i].value != 1)
+                printf("♣  %d\n", deck[i].value);
+            else if (deck[i].value == 11)
+                printf("♣  J\n");
+            else if (deck[i].value == 12)
+                printf("♣  Q\n");
+            else if (deck[i].value == 13)
+                printf("♣  K\n");
+            else if (deck[i].value == 1)
+                printf("♣  A\n");
+        }
+        if (deck[i].suit == 59) {
+            if (deck[i].value <= 10 && deck[i].value != 1)
+                printf("◆  %d\n", deck[i].value);
+            else if (deck[i].value == 11)
+                printf("◆  J\n");
+            else if (deck[i].value == 12)
+                printf("◆  Q\n");
+            else if (deck[i].value == 13)
+                printf("◆  K\n");
+            else if (deck[i].value == 1)
+                printf("◆  A\n");
+        }
+    }
+}
+void comparison(Deck userStack[50],Deck cpuStack[50]){
+    
+    int top, numCpu, numUser;
+    int result;
+    top = 0;
+    numCpu = 4;
+    numUser = 4;    
+    //numCardsCpu = 0;
+    //numcardsUser = 0;
+
+    printf("User Deck:     *************** (%d cards)\n", numUser);
+    printDeck(userStack, numUser,top);
+    printf("CPU Deck: *************** (%d cards)\n", numCpu);
+    printDeck(cpuStack,  numCpu,top);
+    while (numCpu > 0 && numUser > 0 ){  //HM changed 
+        
+        printf("The top of the stack is now card: %d\n", top);
+        if (userStack[top].value > cpuStack[top].value){
+            printf("User Wins %d beats %d\n", userStack[top].value , cpuStack[top].value);
+            userStack[numUser+top].value = userStack[top].value;
+            userStack[numUser+top].suit = userStack[top].suit;
+            userStack[numUser+top+1].value = cpuStack[top].value;
+            userStack[numUser+top+1].suit = cpuStack[top].suit;
+            numCpu--;
+            numUser+=1;
+            top++;
+            
+        }
+        else if (userStack[top].value < cpuStack[top].value){
+            printf("CPU Wins %d < %d\n", userStack[top].value ,cpuStack[top].value);
+            cpuStack[numCpu+top].value = cpuStack[top].value;
+            cpuStack[numCpu+top].suit = cpuStack[top].suit;
+            cpuStack[numCpu+top+1] = userStack[top];
+            cpuStack[numCpu+top+1].suit = userStack[top].suit;
+            numUser--;
+            numCpu+=1;
+            top++;
+        }
+        // if tie flip another card
+        else if (userStack[top].value == cpuStack[top].value){
+            top++;
+            printf("TIE - both players lose a card.");  //HM simplify this section
+           /* while (userStack[top].value == cpuStack[top].value){
+                if (userStack[top].value > cpuStack[top].value){
+        
+                    userStack[numUser+1] = cpuStack[top];
+                    numCpu--;
+                    top++;
+                }
+        
+                else if (userStack[top].value < cpuStack[top].value){
+                    cpuStack[numCpu+1] = userStack[top];
+                    numUser--;
+                    top++;
+                }
+            }*/
+        }
+        printf("\nUser Deck: *************** (%d cards)\n", numUser );
+        printDeck(userStack, numUser,top);
+        printf("\nCPU Deck: *************** (%d cards)\n", numCpu );
+        printDeck(cpuStack, numCpu,top);
+        printf("Hit a number for results of the next round!\n");
+        scanf("%*d"); //HM changed from %*c to %d because Enter sign counted as a character too
+    }
+    
+    if (numUser > numCpu)
+        printf("User Wins the Game!\n");
+    else if (numUser < numCpu)
+        printf("CPU Wins the Game!\n");
+}
+
+int main(){
+
+    char choice;
+    char* cardArtDisplay =
+"\n                          ...................-%@@@%%#=:.................."                              
+"\n                   .....-*#%%%%%#%@@%#%%%%@-.....:-+*%@@%%%#+:.:+#%#=:......."                       
+"\n                  ....:%#................@+.---**-........:=#@@@=...-#@@*:..."                       
+"\n        .........-+*%@%%.:+-.-+:...   ..-@-.+:*:==.....   ...=@+.#=-*=..-*%%*-......."               
+"\n..........:-*%@@%+:...+%..*.:-......  ..@#.:==+.*......   ..-%+.#:..-+. .....+%@%=.........."        
+"\n....-*#%@%+-:.........+%..+-+.......  .-@=.+-*-==......   ..%*##-..:#..    .....:=#@%+:........"     
+"\n.*@#+=:.....        ..+%..+:-=.........*@.....:.... .  ....%#.:##+:%...           ...-#@%+-......"   
+"\n%*...#*:...         ..+%..+..-=.......:%-..-+.....      ..*@:..=%@#....          ........:+%@%=....."
+"\n%*...*-*:...         .+%.:=:.:=-......=@.-***+....     ..=@:.:%@@==:..                 ......:+#@#-."
+"\n-@:..=-:%-...       ..+#..*:..:*......@+.*****=...    ..:@%@@@@@@*..     .     .             ....:%*"
+"\n.##..-*:.*:....     ..+%.****.***-...+@-.:**+:...    ..:@*-@@@@@@@+.     .........             ...+@"
+"\n.-@-.:*:.+*:...      .+%.********-..-@#...-............##..:=@-%@@=.....:*@@@@@+....          ...:%="
+"\n..##..:.+*.......    .+%..=****+:.:*#@-..............:%#.....:==.......+@@@@@@@@@=...        ....@*."
+"\n..:@=..*@@@@#:...    .+%....+*:...+*%#....    .....:+%@-........:=++-:-@@@@@@@@@@@:...        ..#%.."
+"\n...*%.*@@@@@@*.... ..:@%..........+*@-.... ......-**#@:.......+@@@@@@@@@@@@@@@@@@@-..       ...+%..."
+"\n   :%=:*#+%=........-@@%..........:%%..... .....****@=.......*@@@@@@@@@@@@@@@@@@@*....    ....=@-..."
+"\n   .*@:..*+.... ...-@@@%...     ...@+.     .....:**@*...   .:%@@@@@@@@@@@@@@@@@@*:...      ..=@+... "
+"\n   .:@+..     ....#@@@@%...     ..+@:.        ...=@%...   ...#@@@@@@@@@@@@@@@@@@@@@#...  ...:%+..   "
+"\n   ..+%:.     ...*@@@@@%...     ..%#..       ....*%...      ..*@@@@@@@@@@@@@@@@@@@@@#.......%*...   "
+"\n   ...%+.     ..:@@@@@@%...     .=@:..       ...+@-..        ...:*%%*-=@@@@@@@@@@@@@@:.....#%:..    "
+"\n   ...=@...   ...*@@@@@%...     .*#         ...=@=...       ........:#@@:*@@@@@@@@@@#.. ..+@:..     "
+"\n    ..:##...  ....=@@@@%...     :@-          .:@=..         ..#%++%@@@@@:.-@@@@@@@@#.....-@-...     "
+"\n      .=@-..     .....+%...  ...##.        ...@*..           ....-*@@@@@%....-++=-......-@+....     "
+"\n      ..%*..      . ..+%...  ..:@+.       ...%%...            .......:*%@@-......... ..:%*...       "
+"\n      ..-@-.        ..+%...  ..*@:.      ...+@....                 ......:=+...=:......##....       "
+"\n       ..*#...      ..+% ..  .:%#..      ..=@:.                          ...#@@+##+:..##:...        "
+"\n       ..-@=...     ..+%...  .-@...      .:@+..                          ..:@@@@@@@*.+@:...         "
+"\n        ..#%:..     ..+%...  .=@...      ..@*.....                       ...:%@@@@@%=@-...          "
+"\n        ...@=..     ..+%...  .:#@-..........#@#-........                 ..=:%@@=..:@=...           "
+"\n        ...+%...    ..+%........:=*#@@##+-....:=#@%+:.... .              ..+%##:..:%*...            "
+"\n        ...:%*....  ..:#%=:::::::::::::-+#@@@@%*=-:=#@%+:.....           .++-#-*..##..              "
+"\n        ....+@:...   ....:-======+%@@@%*==========*%@@@@@@@%-............-+...%%=*%:..              "
+"\n          ...@*...........:=+%@%*+-................ ....-=*#%@@#=:.......%...*=.+@-...              "
+"\n          ...-@=....:+%@@@#-....      ...                 ......=@@@+....%:.++.-@=...               "
+"\n          ....:+%%%*=-........ ...                        . ........-*%%*-::..:@+...                "
+"\n           .............                                           .....:*%@@@%-...                 ";
+    
+    FILE *file = fopen("cardIntroduction.txt", "r");
+    fprintf(file,"%s\n", cardArtDisplay);
+    fprintf(file,"Welcome to War!\n");
+    fprintf(file,"Gameplay:\n");
+    fprintf(file,"1.Each player is dealt 26 cards, one at a time, face down.\n");
+    fprintf(file,"2.Players simultaneously flip over the top card of their decks.\n");
+    fprintf(file,"3.The player with the higher card takes both cards and adds them to the bottom of their deck.\n");
+    fprintf(file,"4.If the flipped cards have the same rank, it's War\n");
+    fprintf(file,"5.Each player places one card face down and one card face up.\n");
+    fprintf(file,"6.The player with the higher face-up card takes all the cards involved (4 cards total).\n");
+    fprintf(file, "7.If there's another tie, the process repeats until one player has a higher card.\n");
+    fprintf(file, "8.The game continues until one player has won all the cards.\n");
+    fclose(file);
+    
+    printf(file);
+
+    srand(time(NULL));
+    int i;
+    int cardsPerHand = 4;
+    Deck cardStack[52];
+    Deck cpuStack[5000];
+    Deck userStack[5000];
+    for (i = 0; i < 52; i++) {
+        int suit = i / 13;
+        int value = i % 13;
+        cardStack[i].suit = 56 + suit;
+        cardStack[i].value = value + 1;
+    }
+    shuffleDeck(cardStack);
+    
+    for (i = 0; i < cardsPerHand; i++) {
+        cpuStack[i].value = cardStack[i].value;
+        cpuStack[i].suit = cardStack[i].suit;
+        
+    }
+
+    for (i = 0; i < cardsPerHand; i++) {
+        userStack[i].value = cardStack[i+cardsPerHand].value;
+        userStack[i].suit = cardStack[i+cardsPerHand].suit;
+    }
+    comparison(userStack,cpuStack);
+
+    return 0;
+}
