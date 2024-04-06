@@ -1,8 +1,6 @@
 #include <stdio.h>
 
-int main() {
-
-    char choice;
+void intro() {
     int round;
     char welcomeDisplay[200];
     FILE *welcome = fopen("welcome.txt", "r");
@@ -14,9 +12,5 @@ int main() {
       for(round = 0;round<45;round++) {
         fgets(welcomeDisplay, 200, ptr);
         printf("%s", welcomeDisplay);
-      }  
- 
-    //start gameplay
-    
-    return 0;
+      }
 }
