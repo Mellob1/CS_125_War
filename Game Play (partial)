@@ -71,39 +71,33 @@ void printDeck(Deck* deck, int numCards, int topDeck) {
         }
     }
 }
-void comparison(Deck userStack[50],Deck cpuStack[50]){
-    
+void comparison(Deck userStack[50], Deck cpuStack[50]) {
+
     int top, numCpu, numUser;
     int result;
     top = 0;
     numCpu = 4;
-    numUser = 4;    
+    numUser = 4;
 
     printf("User Deck: *************** %d\n", numUser - top);
-    printDeck(userStack, numUser,top);
-         printf("CPU Deck: *************** %d\n",numCpu - top);
-         printDeck(cpuStack,  numCpu,top);
-    while (numCpu-top >= 0 && numUser-top >= 0 ){
-        
-         
-        if (userStack[top].value > cpuStack[top].value){
+    printDeck(userStack, numUser, top);
+    printf("CPU Deck: *************** %d\n", numCpu - top);
+    printDeck(cpuStack, numCpu, top);
+    while (numCpu - top >= 0 && numUser - top >= 0) {
+
+        if (userStack[top].value > cpuStack[top].value) {
             printf("User Wins\n");
-            userStack[numUser].value = userStack[top].value;
-            userStack[numUser].suit = userStack[top].suit;
-            userStack[numUser+1].value = cpuStack[top].value;
-            userStack[numUser+1].suit = cpuStack[top].suit;
-            numCpu--;
-            numUser+=2;
+            userStack[numUser+1] = userStack[top];
+            userStack[numUser + 2] = cpuStack[top];
+            //numCpu--;
+            numUser += 2;
             top++;
-        }
-        else if (userStack[top].value < cpuStack[top].value){
+        } else if (userStack[top].value < cpuStack[top].value) {
             printf("CPU Wins\n");
-            cpuStack[numCpu].value = cpuStack[top].value;
-            cpuStack[numCpu].suit = cpuStack[top].suit;
-            cpuStack[numCpu+1].value = userStack[top].value;
-            cpuStack[numCpu+1].suit = userStack[top].suit;
-            numUser--;
-            numCpu+=2;
+            cpuStack[numCpu+1] = cpuStack[top];
+            cpuStack[numCpu + 2] = userStack[top];
+            //numUser--;
+            numCpu += 2;
             top++;
         }
         // if tie flip another card
@@ -111,12 +105,12 @@ void comparison(Deck userStack[50],Deck cpuStack[50]){
             top++;
             while (userStack[top].value == cpuStack[top].value){
                 if (userStack[top].value > cpuStack[top].value){
-        
+
                     userStack[numUser+1] = cpuStack[top];
                     numCpu--;
                     top++;
                 }
-        
+
                 else if (userStack[top].value < cpuStack[top].value){
                     cpuStack[numCpu+1] = userStack[top];
                     numUser--;
@@ -125,13 +119,13 @@ void comparison(Deck userStack[50],Deck cpuStack[50]){
             }
         }*/
         printf("\nUser Deck: *************** \n");
-        printDeck(userStack, numUser+top,top);
+        printDeck(userStack, numUser, top);
         printf("\nCPU Deck: *************** \n");
-        printDeck(cpuStack, numCpu+top,top);
+        printDeck(cpuStack, numCpu, top);
         printf("Hit enter for results of the next round!\n");
         scanf("%*c");
     }
-    
+
     if (numUser > numCpu)
         printf("User Wins the Game!\n");
     else if (numUser < numCpu)
@@ -143,8 +137,8 @@ int main(){
     int i;
     int cardsPerHand = 4;
     Deck cardStack[52];
-    Deck cpuStack[50];
-    Deck userStack[50];
+    Deck cpuStack[500];
+    Deck userStack[500];
     for (i = 0; i < 52; i++) {
         int suit = i / 13;
         int value = i % 13;
@@ -163,6 +157,7 @@ int main(){
         userStack[i].value = cardStack[i+cardsPerHand].value;
         userStack[i].suit = cardStack[i+cardsPerHand].suit;
     }
+
     comparison(userStack,cpuStack);
 
     return 0;
