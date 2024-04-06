@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include "card.h"
-//Creating Cards
-
 //Shuffling Deck of Cards using Fisher Yates Algorithm
 void shuffleDeck(Deck* deck) {
     int i, j;
