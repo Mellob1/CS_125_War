@@ -7,3 +7,4 @@ typedef struct cardDeck {
 
 void shuffleDeck(Deck* deck);
 void printDeck(Deck* deck, int numCards, int topDeck);
+void comparison(Deck userStack[50],Deck cpuStack[50]);
