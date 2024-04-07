@@ -8,51 +8,51 @@ void printDeck(Deck* deck, int numCards, int topDeck) {
     for (i = topDeck; i < (numCards + topDeck); i++) {
          if (deck[i].suit == 56) {
             if (deck[i].value <= 10 && deck[i].value != 1)
-                printf("?  %d\n", deck[i].value);
+                printf("♥  %d\n", deck[i].value);
             else if (deck[i].value == 11)
-                printf("?  J\n");
+                printf("♥  J\n");
             else if (deck[i].value == 12)
-                printf("?  Q\n");
+                printf("♥  Q\n");
             else if (deck[i].value == 13)
-                printf("?  K\n");
+                printf("♥  K\n");
             else if (deck[i].value == 1)
-                printf("?  A\n");
+                printf("♥  A\n");
         }
         if (deck[i].suit == 57) {
             if (deck[i].value <= 10 && deck[i].value != 1)
-                printf("?  %d\n", deck[i].value);
+                printf("♠  %d\n", deck[i].value);
             else if (deck[i].value == 11)
-                printf("?  J\n");
+                printf("♠  J\n");
             else if (deck[i].value == 12)
-                printf("?  Q\n");
+                printf("♠  Q\n");
             else if (deck[i].value == 13)
-                printf("?  K\n");
+                printf("♠  K\n");
             else if (deck[i].value == 1)
-                printf("?  A\n");
+                printf("♠  A\n");
         }
         if (deck[i].suit == 58) {
             if (deck[i].value <= 10 && deck[i].value != 1)
-                printf("?  %d\n", deck[i].value);
+                printf("♣  %d\n", deck[i].value);
             else if (deck[i].value == 11)
-                printf("?  J\n");
+                printf("♣  J\n");
             else if (deck[i].value == 12)
-                printf("?  Q\n");
+                printf("♣  Q\n");
             else if (deck[i].value == 13)
-                printf("?  K\n");
+                printf("♣  K\n");
             else if (deck[i].value == 1)
-                printf("?  A\n");
+                printf("♣  A\n");
         }
         if (deck[i].suit == 59) {
             if (deck[i].value <= 10 && deck[i].value != 1)
-                printf("?  %d\n", deck[i].value);
+                printf("◆  %d\n", deck[i].value);
             else if (deck[i].value == 11)
-                printf("?  J\n");
+                printf("◆  J\n");
             else if (deck[i].value == 12)
-                printf("?  Q\n");
+                printf("◆  Q\n");
             else if (deck[i].value == 13)
-                printf("?  K\n");
+                printf("◆  K\n");
             else if (deck[i].value == 1)
-                printf("?  A\n");
+                printf("◆  A\n");
         }
     }
 }
