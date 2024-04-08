@@ -8,6 +8,7 @@
 * to essencially run the main part of the game.
 ****************************************************************************************/
 int main(){
+    intro();
     srand(time(NULL));
     int i;
     int cardsPerHand = 4;
