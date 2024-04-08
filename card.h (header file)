@@ -1,10 +1,11 @@
 #define CARDS_IN_DECK 52
-typedef struct cardDeck {
+//structure defining a card
+typedef struct card {
     int suit; // 56,57,58,59 wrt, heart, spades,clubs,diamonds
-    int value;// 1,2....10,11,12,13
-} Deck;                //HM - Deck is not the best name because this structure is only for a single card
-                       //if you create an Array of this type, it will be a deck 
+    int value;// 1,2....10,11,12,13, ace being lowest card at value 1
+} Card;
 
-void shuffleDeck(Deck* deck);
-void printDeck(Deck* deck, int numCards, int topDeck);
-void comparison(Deck userStack[50],Deck cpuStack[50]);
+//prototypes for functions being used
+void shuffleDeck(Card* deck);
+void printDeck(Card* deck, int numCards, int topDeck);
+void comparison(Card userStack[50],Card cpuStack[50]);
