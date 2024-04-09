@@ -4,13 +4,15 @@
 #include "card.h"
 void comparison(Card userStack[50],Card cpuStack[50]){
     /**********************************************************************************
-    *top is the top of deck, numCpu is the number of cards the cpu has, 
-    *same for numUser but for the user, 
-    *goOn is the variable to check if a int was entered and if so move on with the game.
+    * top is the top of deck, numCpu is the number of cards the cpu has, 
+    * same for numUser but for the user, 
+    * goOn is the variable to check if a int was entered and if so move on with the game.
+    * Word stores a word or character if the user enters it for error checking, will go
+    * onto next round when goOn equals 1, word is basically junk storage.
     ***********************************************************************************/
     
     int top, numCpu, numUser, goOn; 
-    char letter;
+    char word[100];
     top = 0;
     numCpu = 4;
     numUser = 4;    
@@ -29,7 +31,7 @@ void comparison(Card userStack[50],Card cpuStack[50]){
         //checks to make sure characters arent entered
         while (scanf("%d", &goOn) != 1){
             printf("Error please enter a number to continue to next round: ");
-            scanf("%c", &letter);
+            scanf("%s", &word);
         }
         //printf("The top of the stack is now card: %d\n", top); used for checking game is right
         //this next if stateent checks if users card is greater thn CPUs card at top of stack
