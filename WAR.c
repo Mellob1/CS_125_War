@@ -9,9 +9,10 @@
 ****************************************************************************************/
 int main(){
     intro();
+    printf("\n\n");
     srand(time(NULL));
     int i;
-    int cardsPerHand = 4;
+    int cardsPerHand = 10;
     Card cardStack[52];
     Card cpuStack[5000];
     Card userStack[5000];
