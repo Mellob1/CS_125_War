@@ -14,8 +14,8 @@ void comparison(Card userStack[50],Card cpuStack[50]){
     int top, numCpu, numUser, goOn; 
     char word[100];
     top = 0;
-    numCpu = 4;
-    numUser = 4;    
+    numCpu = 10;
+    numUser = 10;    
 
     printf("User Deck: *************** (%d cards)\n", numUser);
     printDeck(userStack, numUser,top);
@@ -144,3 +144,4 @@ void comparison(Card userStack[50],Card cpuStack[50]){
     else if (numUser < numCpu)
         printf("\nCPU Wins the Game!\n");
 }
+
